@@ -6,7 +6,8 @@ from pymongo.son_manipulator import SONManipulator
 
 conexion = Connection('localhost')
 bd = conexion.bosqueseco
-bd.authenticate('forestweb','forestweb')
+###Cambiar configuracion
+###bd.authenticate('userbd','clavebd') 
 
 #testing ...
 def reconectar():
