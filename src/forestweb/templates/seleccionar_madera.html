@@ -1,0 +1,45 @@
+$def with(maderas)
+<html>
+  <head>
+    <title> Seleccione la Madera</title>
+    <!--link rel="stylesheet" type="text/css" href="/static/css/tipsy.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/forest.css"/>
+	<script type="text/javascript" src="/static/js/jquery.js"> </script>
+	<script type="text/javascript" src="/static/js/jquery.tipsy.js"> </script>
+	<script type="text/javascript" src="/static/js/forest.js"> </script-->
+ 
+    <script type="text/javascript" language="javascript" encoding="UTF-8">  
+      jQuery("*[title]").tipsy();	
+      jQuery(document).ready(function(){
+	  configuracion_datatable.bProcessing = true;
+	  //configuracion_datatable.sScrollY = "100px";
+	  configuracion_datatable.bSort = true;
+	  // Ordenable solo por nombre de uso
+	  ordenaciones = [{"bSortable":true}]
+	  configuracion_datatable.aoColumns = ordenaciones;
+          jQuery('#tabla-selector-madera').dataTable(configuracion_datatable);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="selector-maderas">
+    <table id="tabla-selector-madera" width="100%" cellspacing="0" cellpadding="0" border="0" style="float:left;">
+      <thead>
+	  <th>
+	    SELECCIONE LA MADERA A ANALIZAR:
+	  </th>
+      </thead>
+      <tbody>
+	$for m in maderas:
+	<tr>	
+	  <td>
+	    <a href="javascript:menu_ajax('/analizar_madera?id_madera=$m.id_madera')" 
+	       onclick="jQuery(document).css('cursor','wait');"> $m.nombre </a>
+	       <!--onclick="alert('asdf');"> $m.nombre </a-->
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+    </div>
+  </body>
+</html>

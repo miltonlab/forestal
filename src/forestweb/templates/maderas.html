@@ -1,0 +1,54 @@
+$def with(propiedades,maderas)
+<html>
+  <head>
+    <title> Maderas</title>
+    <!--link rel="stylesheet" type="text/css" href="/static/css/tipsy.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/forest.css"/>
+    <script type="text/javascript" src="/static/js/jquery.js"> </script>
+    <script type="text/javascript" src="/static/js/jquery.tipsy.js"> </script>
+    <script type="text/javascript" src="/static/js/forest.js"> </script-->
+    <script type="text/javascript" language="javascript">
+      jQuery("*[title]").tipsy();	
+      jQuery(document).ready(function(){
+	  configuracion_datatable.bProcessing = false;
+	  configuracion_datatable.bSort = true;
+	  // Ordenable solo por nombre de madera
+	  ordenaciones = [{"bSortable":true}]
+	  // Se toma el limite usando webpy
+	  for (var i=0;i<$len(propiedades);i++){
+	      ordenaciones.push({"bSortable":false})
+	  }
+	  configuracion_datatable.aoColumns = ordenaciones;
+          jQuery('#tabla-maderas').dataTable(configuracion_datatable);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="tablam">
+    <table id="tabla-maderas" width="100%" cellspacing="0" cellpadding="0" border="0" style="float:left;">
+      <thead>
+	<th>
+	  MADERA
+	</th>
+	$for p in propiedades:
+	<th title="${'<' + p.get('categoria','') + '>' + '\n' + p.get('nombre')}">
+          $p.get('codigo')
+	</th>
+      </thead>
+      <tbody>
+	$for m in maderas:
+	<tr>
+	  <td>
+            <a href="javascript:menu_ajax('/editmadera?id_madera=$m.id_madera')"> $m.nombre</a>
+	  </td>
+	  $for p in propiedades:
+	  <td>
+	    $ v = m.propiedades.get(p.get('id_propiedad'),'-')
+	    $v
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+    </div>
+  </body>
+</html>

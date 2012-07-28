@@ -1,0 +1,76 @@
+$def with(madera,propiedades)
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <script type="text/javascript" language="javascript"> 
+    /* Está en el archivo principal de scripts js */
+
+    config_edit_madera();
+
+    </script>
+  </head>
+  <body>
+    $# discriminar edición o grabación
+    $if len(madera.nombre) > 0:
+        $ readonly = "readonly='readonly'"
+        $ disabled = "disabled='disabled'"
+    $else:
+        $ readonly = ""
+        $ disabled = ""
+    
+    <form id="form-madera"  action="">
+      <a id="div-nombre-uso" style="font-size: 18px; vertical-align: top;"> Nombre de la Madera:  </a>  <br/>
+      <input id="id_madera" type="hidden" name="id_madera" value="$madera.id_madera"/>
+      <input id="nombre" type="text" name="nombre" value="$madera.nombre" class="texto-titulo"/> 
+      <fieldset id="opciones">
+	<legend> Opciones </legend>
+	<input id="por_valor" type="radio" name="selector-madera" checked value="por_valor"/>  Ingresar Valores
+	<input id="codificar" type="radio" name="selector-madera" value="codificar" /> Codificar
+	<input id="por_propiedad" type="radio" name="selector-madera" value="por_propiedad"/> Codificaciones Diréctamente
+      </fieldset>
+      <fieldset>
+	<legend> Propiedades de la Madera </legend>
+      <table id="tabla-madera" cellspacing="0">
+	<thead>
+	  <tr>
+	  <th> Propiedad </th>
+	  <th> Valores </th>
+	  <th> Codificaciones </th>
+	  <th> . </th>
+	  </tr>
+	</thead>
+	<tbody>
+	  $for p in propiedades:
+	  <tr>
+	    <td title="${p.get('clase') + ' <'+p.get('categoria','') + '>' + '\n' + p.get('nombre')}">
+	      $p.get('nombre')
+	    </td>
+	    <td align="center"> 
+	      $ valor = madera.propiedades.get(p.get('id_propiedad'))
+	      $if p.get('clase').startswith('tecnol'):
+		  <input id="valor-$p.get('id_propiedad')" name="valor-$p.get('id_propiedad')" type="text" value="$madera.valores.get('id_propiedad','')" class="rango-decimal"/>
+	      $elif p.get('clase').startswith('anat'):
+		  <select id="valor-$p.get('id_propiedad')" name="valor-$p.get('id_propiedad')" value="$madera.valores.get('id_propiedad','')" class="rango-texto">
+		    <option value="" selected="selected"> </option>
+		    $# Todas las codificaciones de la propiedad  
+		    $# Como valor se enviará la codificación en 'nombre'
+		    $for (kcp,vcp) in p.get('codificaciones').items():
+		        <option value="$kcp"> $vcp </option>
+		  </select>
+	    </td>
+	    <td align="center">
+	      <input id="prop-$p.get('id_propiedad')" name="prop-$p.get('id_propiedad')" type="text" value="$valor" readonly="readonly" class="rango-entero"/>
+	    </td>
+	    <td id="$p.get('id_propiedad')-msg" width="60px" style="padding: 3px 0px 3px 0px;">
+	      <!-- espacio para mensajes -->
+	    </td>
+	  </tr>
+	</tbody>
+      </table>
+      </fieldset>
+      <button id="btnguardar" class="boton-grande" $disabled> GUARDAR MADERA </button>
+      <!--input type="reset" value="LIMPIAR"/>
+      <input type="submit" value="GRABAR"/-->      
+    </form> 
+  </body>
+</html>

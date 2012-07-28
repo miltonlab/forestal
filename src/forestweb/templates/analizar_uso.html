@@ -1,0 +1,83 @@
+$def with(propiedades,uso,maderas_compatibles,maderas_analisis)
+<html>
+  <head>
+    <title> Análisis de la Madera</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery-ui-custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.ui.tabs.css"/>
+
+    <script type="text/javascript" language="javascript" src="/static/js/jquery-ui-custom.js"> </script>
+    <script type="text/javascript" language="javascript" src="/static/js/jquery.ui.core.js"> </script>
+    <script type="text/javascript" language="javascript" src="/static/js/jquery.ui.widget.js"> </script>
+    <script type="text/javascript" language="javascript" src="/static/js/jquery.ui.tabs.js"> </script>
+ 
+    <script type="text/javascript" language="javascript" encoding="UTF-8">  
+      jQuery("*[title]").tipsy();	
+      jQuery("#tabs").tabs();
+      jQuery(document).ready(function(){
+	  configuracion_datatable.bProcessing = true;
+	  //configuracion_datatable.sScrollY = "100px";
+	  configuracion_datatable.bSort = true;
+	  // Ordenable solo por nombre de uso
+	  ordenaciones = [{"bSortable":true}]
+	  // Se toma el limite usando webpy
+	  for (var i=0;i<$len(propiedades);i++){
+	      ordenaciones.push({"bSortable":false})
+	  }
+	  configuracion_datatable.aoColumns = ordenaciones;
+          jQuery('#tabla-analisis-uso').dataTable(configuracion_datatable);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="tabs">
+      <ul>
+	<li> <a href="#resultado"> MADERAS compatibles </a> </li>
+	<li> <a href="#analisis"> Análisis del uso <b>$uso.nombre</b> </a> </li>
+      </ul>
+
+    <div id="resultado">
+      <ol>
+	$for m in maderas_compatibles:
+	<li> $m.nombre </li>
+      </ol>
+    </div>
+    
+    <div id="analisis">
+    <table id="tabla-analisis-uso" width="100%" cellspacing="0" cellpadding="0" border="0" style="float:left;">
+      <thead>
+	<tr>
+	  <th>
+	    MADERA
+	  </th>
+	  $for p in propiedades:
+	    $ obligatoria = 'obligatoria' if p.get('obligatoria') else ''
+	    <th title="${p.get('categoria','') + '\n' + p.get('nombre') + '\n' + obligatoria}">
+              $p.get('codigo')
+	    </th>
+	</tr>
+      </thead>
+      <tbody>
+	$for madera_analisis in maderas_analisis:
+	<tr>	
+	  <td>
+	    <a href="#"> $madera_analisis.get('nombre_madera')</a>
+	  </td>
+	  $# es una colección de tuplas model.Compatibilidad
+	  $for c in madera_analisis.get('analisis'):
+	    $ valor, clase_obligatoria, clase_incompatible = '','',''
+	    $if c.obligatoria != None and c.compatible != None:
+	      $ valor = 'C' if c.compatible else 'I'
+	      $ clase_obligatoria = 'obligatoria' if c.obligatoria else ''
+	      $ clase_incompatible = 'incompatible' if c.obligatoria and not c.compatible else ''
+	    $else:
+	      $ valor = '-'
+	    <td align="center" class="$clase_obligatoria $clase_incompatible">
+	      $valor
+	    </td>
+	</tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+  </body>
+</html>

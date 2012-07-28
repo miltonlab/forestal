@@ -1,0 +1,251 @@
+.rango-texto{
+    width: 120px;
+    border: 1px silver aqua;
+    text-align: left;
+}
+.rango-decimal{
+    width: 60px;
+    border: 1px silver aqua;
+    text-align: right;
+    padding-right: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.rango-entero{
+    width: 50px;
+    border: 1px silver aqua;
+    text-align: center;
+    margin-left: 5px;    
+    margin-right: 5px;
+}
+
+.texto-titulo{
+    width: 100%;
+    height: 30px;
+    vertical-align: bottom;
+    margin-bottom: 20px;
+    margin-left: 0px;
+    padding-left: 5px;
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 30px;
+    text-align: center;
+    vertical-align: middle;
+    height: 100%;
+    
+}
+
+.boton-grande{
+    height: 40px;
+    width: 200px;
+    font-weight: bold;
+}
+
+.obligatoria{
+    color: red;
+}
+
+.incompatible{
+    color: white;
+    background-color: #bb0000;
+}
+
+/* Estilo para los campos de texto de solo lectura */
+input[readonly]{
+    background-color: #EDE9E3;
+    color: black;
+}
+
+input {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #EDE9E3;
+}
+
+select {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #EDE9E3;
+    align-text: center;
+}
+
+input[type=radio]{
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+#form-madera table td, #form-uso table td {
+    border-bottom: 1px dotted gray;
+}
+
+table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+thead{
+    margin-bottom: 5px;
+}
+
+th{
+    background-color: #e3f2e1;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    height: 2em;
+    text-transform: uppercase;
+    margin-right: 2px;
+}
+
+td {
+    border-left: 1px solid white;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+tr.even {
+    /*background-color:  #eeffee;*/
+    background-color:  #cae6c6;
+}
+
+tr.odd {
+    /*background-color: #ddffdd;*/
+    background-color: #e3f2e1;
+}
+
+a[href]:hover {
+    background-color: #eeffee; 
+    color: black;
+}
+
+/* tabla codificaciones de propiedades */
+table td table td {
+    background-color:  #cae6c6;
+    border-left: 1px dotted white;
+    border-right: 1px dotted white;
+}
+
+.error {
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    margin: 3px 0px 3px 0px;
+}
+
+
+legend {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/*form-propiedad label, form-uso label, form-madera label {*/
+fieldset label {
+    float: left;
+    display: block;
+    width: 100px;
+    text-align: left;
+    padding-right: 10px;
+    margin: 3px 0;
+}
+
+fieldset {
+    border: 1px solid #CCC;
+    margin-bottom: 10px;
+    -moz-border-radius: 5px 5px;
+}
+
+/*form-propiedad input{*/
+fieldset input {
+    height: 17px;
+    padding: 0 0 0 3px;
+    width: 200px;
+    margin: 2px 0;
+}
+
+/* login */
+#imgportada{
+    float: left; 
+    align: center;
+}
+
+#fondo-login{
+    /*background-image: url('/static/images/portada.png');*/
+    background-image: url('../images/bosque1.2.jpeg');
+    background-repeat: repeat-x; 
+}
+
+#form-login{
+    float: right;
+    display: table-caption;
+    border: green;
+    margin-right: 5px;
+    /*background-color: #EDECEA;*/
+    background-color: #E0E0DF;
+    /* propiedad específica para mozilla firefox*/
+    -moz-border-radius: 5px 5px;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    width: 250px;
+
+}
+
+
+#form-login label{
+    font-family: Arial;
+    font-size: small;
+}
+
+#form-login input[type=text], #form-login input[type=password]{
+    border-color: #eeffee;
+    height: 35px;
+    font-size: 30px;
+    width: 250px;
+    color: green;
+    -moz-border-radius: 5px 5px;
+}
+
+#btnlogin{
+    align: center;
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    -moz-border-radius: 10px 10px;
+}
+
+
+/* Para la portada */
+.proyecto {
+    margin-top: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: fantasy,sans-serif,Arial,Times;
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+    text-transform:  uppercase;
+    font-stretch: focus;
+}
+
+div.proyecto:hover {
+    color: green;
+    cursor: pointer;
+    
+}
+
+.senescyt {
+    display: block;
+    position: fixed;
+    left: 10%;   
+    bottom: 10%;
+ 
+}
+
+.cedamaz {
+    position: fixed;
+    right: 10%; 
+    bottom: 10%;
+ 
+}

@@ -1,0 +1,38 @@
+$def with(propiedades,usos)
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<script type="text/javascript" language="javascript" encoding="UTF-8"> 
+    jQuery(document).ready(function(){
+	jQuery("*[title]").tipsy();	
+	configuracion_datatable.bSort = true;
+	jQuery('#tabla-usos').dataTable(configuracion_datatable);
+    });
+</script>
+<div id="tablau" width="400px">
+  <table id="tabla-usos" width="1000px" border="0" cellppading="0" cellspacing="0" style="float:left;">
+    <thead>
+      <th>
+	USO
+      </th>
+      $for p in propiedades:
+      <th title="${'<' + p.get('categoria','') + '>' + '\n' + p.get('nombre')}">
+        $p.get('codigo')
+      </th>
+    </thead>
+    <tbody>
+      $for u in usos:
+      <tr>
+	<td>
+          <a href="javascript:menu_ajax('/edituso?id_uso=$u.id_uso')"> $u.nombre</a>
+	</td>
+	  $for p in propiedades:
+	  <td align= "center">
+	    $ r = u.propiedades.get(p.get('id_propiedad'),None)
+	    $if r and r.min and r.max:
+	        $r.min a $r.max
+	    $else:
+	        -
+	  </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

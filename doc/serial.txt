@@ -1,0 +1,3 @@
+#ejecutar en python
+import md5
+md5.md5('mil').hexdigest()[:8]

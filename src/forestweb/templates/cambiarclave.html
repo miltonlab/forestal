@@ -1,0 +1,84 @@
+$def with(session)
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="keywords" content="madera analyis bosque Ecuador cedamaz" />
+    <meta name="description" content=" Software for analysis of forest..." />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <!--link href="static/themes/greenforest/style.css" rel="stylesheet" type="text/css" media="screen" /-->
+    <link rel="stylesheet" type="text/css" href="/static/css/forest.css">
+
+    <script type="text/javascript" language="javascript" charset="utf-8">
+	function cambiar_clave(){
+	    // Tomamos el password del campo hidden cuyo valor lo obtuvo con la ayuda de Webpy
+	    var pwd = jQuery("#pwd").val();
+	    if (jQuery('#password').val() == '' || 
+		jQuery('#newpassword1').val() == '' ||
+		jQuery('#newpassword2').val() == ''){
+		alert("Datos incompletos!!!");
+	    }else if (jQuery('password').val() != pwd ){
+		alert("Error, clave incorrecta!!!");
+	    }else if (jQuery('#newpassword1').val() != 
+		     jQuery('#newpassword2').val()) {
+		alert("Debe repetir la clave nueva!!!");
+	    }else {
+		jQuery.ajax({
+		    type: "POST",
+		    url: "/cambiarclave",
+		    data: jQuery("#form-cambio-clave").serializeArray(),
+		    error: function(xhr,status){
+			alert("Error al cambiar clave: " + status + xhr);
+		    },
+		});
+		jQuery("#content").html("<h3> Clave Cambiada con éxito </h3>");
+	    }
+	};
+    </script>
+  </head>
+  <body id="fondo-login">
+    <form id="form-cambio-clave" >
+      <input id="pwd" type="hidden" name="pwd" value="$session.password"/>
+      <fieldset>
+	<legend align="center">Datos de su Cuenta</legend>
+	<table>
+	  <tr>
+	    <td align="right">
+	      <label for="username" id="lblusername"><b>Usuario:</b></label> 
+	    </td>
+	    <td>
+	      <input id="username" name="username" type="text" value="$session.username" readonly/> 
+	    </td>
+	  </tr>
+	  <tr>
+	    <td align="right">
+	      <label for="password" id="lblpassword" ><b>Clave Actual:</b></label> <br/>
+	    </td>
+	    <td>
+	      <input id="password" name="password" type="password" onload="this.focus();"/> 
+	    </td>
+	  </tr>
+	  <tr>
+	    <td align="right">
+	      <label for="newpassword1" id="lblpassword"><b>Clave Nueva:</b></label> <br/>
+	    </td>
+	    <td>
+	      <input id="newpassword1" name="newpassword1" type="password"/> 
+	    </td>
+	  </tr>
+	  <tr>
+	    <td align="right">
+	      <label id="lblnewpassword2" for="newpassword2" ><b>Clave Nueva:</b></label> <br/>
+	    </td>
+	    <td>
+	      <input id="newpassword2" name="newpassword2" type="password"/> 
+	    </td>
+	  </tr>
+	  <tr>
+	    <td></td>
+	    <td>
+	      <button id="btncambiar" class="boton-grande" onclick="cambiar_clave();"> Cambiar Clave </button>
+	    </td>
+	  </tr>
+      </fieldset>
+    </form>
+  </body>
+</html>

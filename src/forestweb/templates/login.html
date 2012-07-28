@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="keywords" content="madera analyis bosque Ecuador cedamaz" />
+    <meta name="description" content=" Software for analysis of forest..." />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <!--link href="static/themes/greenforest/style.css" rel="stylesheet" type="text/css" media="screen" /-->
+    <link rel="stylesheet" type="text/css" href="/static/css/forest.css">
+    <script type="text/javascript" language="javascript">
+    function login(event){
+	 if (event.keyCode == 13){
+	     document.getElementById('form-login').submit();
+	  }
+      }
+    </script>
+  </head>
+  <body id="fondo-login" onload="document.getElementById('username').focus();">
+    <form  action="/login" method="POST">
+      <img id="imgportada" src="../static/images/portada.png"/>
+      <fieldset id="form-login">
+	<label for="username" id="lblusername" >Usuario</label> <br/>
+	<input type="text" id="username" name="username" onkeypress="login(event);"/> <br/>
+	<label for="password" id="lblpassword">Clave</label> <br/>
+	<input type="password" id="password" name="password" onkeypressed="login(event);"/> <br/>
+	<input id="btnlogin" type="submit" value="Ingresar"/>
+      </fieldset>
+    </form>
+
+  </body>
+</html>

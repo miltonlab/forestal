@@ -1,0 +1,65 @@
+$def with(propiedad,codificaciones)
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">    
+    <script type="text/javascript" language="javascript">
+    jQuery(document).ready(function(){
+	jQuery("*[title]").tipsy();	
+    });
+jQuery('#btnguardar').click(function(){
+    var resp = confirm('Está seguro que desea grabar los datos');
+    if (! resp) return;
+    jQuery.ajax({
+	type: 'POST',
+	url: '/editpanatomica',
+	data: jQuery('#form-propiedad').serializeArray(),
+	error: function(xhr,status){
+	    alert("Error al grabar propiedad anatomica: " + status + xhr);
+	},
+	success: function(response){
+	    // En la pagina principal
+	    jQuery('#content').html('<h1>  Propiedad Grabada con Exito </h1>');
+	}
+    });
+});
+</script>
+  </head>
+  <body>
+    <form id="form-propiedad" action="">
+      $# discriminar edición o grabación
+      $if len(propiedad) > 1:
+          $ readonly = "readonly='readonly'"
+          $ disabled = "disabled='disabled'"
+      $else:
+          $ readonly = ""
+          $ disabled = ""
+      <fieldset id="datos"> 
+	<legend> Datos </legend>
+	<label id="id_propiedad" title="Identificador de la Propiedad" >Identificador </label> 
+	<input id="id_propiedad" name="id_propiedad" type="text" value="$propiedad.get('id_propiedad','0')" readonly="readonly"/> <br/>
+	  
+	<label for="nombre"  title="Nombre de la Propiedad">Nombre </label> 
+	<input id="nombre" name="nombre" type="text" value="$propiedad.get('nombre','')" $readonly/> <br/>
+	
+	<label for="abreviatura"  title="Si la hay">Abreviatura </label> 
+	<input id="abreviatura" name="abreviatura" type="text" value="$propiedad.get('codigo','')" $readonly/> <br/>
+	  
+	<label for="obligatoria" title="Si o No"> Obligatoria: </label> 
+	$ valor_checkbox = 'checked' if propiedad.get('obligatoria',None) else ''
+	<input id="obligatoria" name="obligatoria" type="checkbox" $valor_checkbox $readonly/> <br/>
+      </fieldset>
+      <fieldset id="codificaciones">
+	<legend> Ccodificaciones </legend>
+	$for c in codificaciones:
+	<label> $c.get('nombre')  [<b>$c.get('valor')</b>] </label>
+	$ valor = ''
+	$if propiedad.get('codificaciones'):
+	    $ valor = propiedad.get('codificaciones').get(c.get('nombre'))
+	<input id="$c.get('nombre')" name="$c.get('nombre')" type="text" value="$valor" class="rango-texto" $readonly/> <br/>
+      </fieldset>
+      <!--input type="reset" value="LIMPIAR"/>
+      <input type="submit" value="GRABAR"/-->
+    </form>
+    <button id="btnguardar" class="boton-grande" $disabled>GUARDAR PROPIEDAD </button>
+  </body>
+</html>

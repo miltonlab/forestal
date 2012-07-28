@@ -1,0 +1,74 @@
+$def with(uso,propiedades)
+<html>
+  <head>
+    <script type="text/javascript" language="javascript" encoding="UTF-8">
+    jQuery("*[title]").tipsy();	
+    // Binding  validacion y onblur con la ayuda de jQuery
+    jQuery('input.rango-entero').each(function (){
+	var t = jQuery(this);
+	t.attr('onblur','validar_entero(this);');
+    });
+    jQuery('#btnguardar').click(function(){
+	var resp = confirm('Está seguro que desea grabar los datos');
+	if (! resp) {
+            window.location.href('#');
+        }else{
+	    jQuery.ajax({
+		type: 'POST',
+		url: '/edituso',
+		data: jQuery('#form-uso').serializeArray(),
+		error: function(xhr,status){
+		    alert("Error al grabar propiedad tecnológica: " + status + xhr);
+		},
+		success: function(response){
+		    // En la pagina principal
+		    jQuery('#content').html('<h3>  Uso de la madera grabado con Exito </h3>').slideDown(1000);
+		 }
+	    });
+        }
+	});
+    </script>
+  </head>
+  <body>
+    $# discriminar edición o creación
+    $if len(uso.nombre) > 0:
+        $# pendiente probando...
+        $# readonly = "readonly='readonly'"
+        $# disabled = "disabled='disabled'"
+        $ readonly = ""
+        $ disabled = ""
+    $else:
+        $ readonly = ""
+        $ disabled = ""
+
+    <form id="form-uso" action="" method="">
+      <a id="div-nombre-uso"  style="font-size: 18px; vertical-align: top;" > Nombre del Uso:  </a> <br/>
+      <input id="nombre" name="nombre" type="text" value="$uso.nombre" class="texto-titulo"/> 
+      <fieldset>
+      <legend> Propiedades del Uso </legend>
+      <table id="tabla-uso">
+	<tbody>
+	  $for p in propiedades:
+	  <tr>
+	    <td title="${p.get('categoria','') + '\n' + p.get('nombre')}">
+	      $p.get('nombre')
+	    </td>
+	    <td>
+	      $ min, max = '','' 
+	      $ r = uso.propiedades.get(p.get('id_propiedad'))
+	      $if r:
+	        $ min,max = r.min,r.max
+	      De <input id="$p['id_propiedad']-min" name="$p['id_propiedad']-min" type="text" value="$min" class="rango-entero" />
+	      a  <input id="$p['id_propiedad']-max" name="$p['id_propiedad']-max" type="text" value="$max" class="rango-entero" />
+	    </td>
+	    <td id="$p['id_propiedad']-msg" width="60px">
+	      <!-- espacio para mensajes -->
+	    </td>
+	  </tr>
+	</tbody>
+      </table>
+      </fieldset>
+    </form> 
+    <button id="btnguardar" class="boton-grande" $disabled> GUARDAR USO </button>
+  </body>
+</html>
