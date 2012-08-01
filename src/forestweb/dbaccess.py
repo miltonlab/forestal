@@ -7,7 +7,7 @@ from pymongo.son_manipulator import SONManipulator
 conexion = Connection('localhost')
 bd = conexion.bosqueseco
 ###Cambiar configuracion
-###bd.authenticate('userbd','clavebd') 
+bd.authenticate('forestweb','forestweb') 
 
 #testing ...
 def reconectar():
@@ -17,7 +17,6 @@ def reconectar():
     bd.authenticate('forestweb','forestweb')
     
 def cambiar_clave(usuario,clave_nueva):
-    print 'llegando: ', usuario, " y ",clave_nueva
     try:
         bd.usuarios.update({'username':usuario},
                            {'username':usuario,'password':clave_nueva})
@@ -31,9 +30,12 @@ def buscar_usuario(username,password):
     return bd.usuarios.find_one({'username':username,'password':password})
 
 
-def buscar_propiedad(id_propiedad):
+def buscar_propiedad(id_propiedad=None,codigo=None):
     """ Devuelve una sola propiedad de la base de datos """
-    return  bd.propiedades.find_one({'id_propiedad':id_propiedad})
+    if id_propiedad:
+        return  bd.propiedades.find_one({'id_propiedad':id_propiedad})
+    elif codigo:
+        return  bd.propiedades.find_one({'codigo':codigo})
 
 def contar_propiedades():
     return bd.propiedades.count()

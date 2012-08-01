@@ -69,8 +69,8 @@ $def with (lista_propiedades)
 	        $ codif = dbcodif(nombre=k)[0]
 	        <td title="$codif.get('valor')" align="center">
 		$if p.get('clase').startswith('tecnol'):
-		    $ min = v.min if v.min else '<'
-		    $ max = v.max if v.max else '>'
+		    $ min = v.min if v.min else '<' #$
+		    $ max = v.max if v.max else '>' #$
 		    <b>$k</b>
 		    <br/>
 		    $min - $max

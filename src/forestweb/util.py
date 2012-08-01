@@ -2,13 +2,16 @@
 import xlrd
 import model
 import dbaccess
+import os
 
 """
 Para cargar a la bd se debe llamar al metodo de grabación adecuado del módulo
 'dbaccess' con cada uno de los objetos retornados por estos métodos.
 """
+path_dbs = os.path.abspath(os.path.dirname(__file__) + '../../db/')
 
-def load_tecnologicas_xls(file='archivos/PROPIEDADES.xls'):
+
+def load_tecnologicas_xls(file=path_dbs+'/excel/PROPIEDADES.xls'):
     """ Carga propiedades físicas y mecánicas de la madera """
     propiedades = []
     campos = ['nombre','categoria','codigo','obligatoria','unidad','muy_bajo','bajo','medio','alto','muy_alto']
@@ -48,7 +51,7 @@ def load_tecnologicas_xls(file='archivos/PROPIEDADES.xls'):
         propiedades.append(propiedad)
     return propiedades
 
-def load_anatomicas_xls(file='archivos/PROPIEDADES.xls'):
+def load_anatomicas_xls(file=path_dbs+'/excel/PROPIEDADES.xls'):
     #""" Carga propiedades anatomicas de la madera """
     propiedades = []
     campos = ['nombre','obligatoria','codigo','excelente','bueno','regular','pobre']
@@ -58,7 +61,8 @@ def load_anatomicas_xls(file='archivos/PROPIEDADES.xls'):
         propiedad = {}
         propiedad['clase'] = 'anatómica'
         propiedad['codificaciones'] = {}
-        id_propiedad = r if not dbaccess.buscar_propiedad(str(r)) else dbaccess.contar_propiedades() + len(propiedades) + 1
+        # TODO: Buscar propiedad por codigo, si exsite actualizar.
+        id_propiedad = r if not dbaccess.buscar_propiedad(str(r)) else (dbaccess.contar_propiedades() + len(propiedades) + 1)
         propiedad['id_propiedad'] = str(id_propiedad)
         for c in range(0,sheet.ncols):
             value = sheet.cell(r,c).value
@@ -94,8 +98,11 @@ def load_usos_xls_old(file='archivos/propiedades2.xls'):
         usos.append(uso)
     return usos
 
-def load_usos_xls(file='archivos/USOS.xls'):
-    """ Carga los datos de los Rangos codificados de los usos """
+def load_usos_xls(file=path_dbs+'/excel/USOS.xls'):
+    """
+    Carga los datos de los Rangos codificados de los usos 
+    NOTA: Es requisito que en primer lugar esten cargadas las propiedades
+    """
     usos = []
     book = xlrd.open_workbook(file)
     sheet = book.sheet_by_index(0)
@@ -136,7 +143,7 @@ def load_maderas_xls_old(file='archivos/propiedades2.xls'):
         maderas.append(madera)
     return maderas
 
-def load_maderas_xls(file='archivos/MADERAS.xls'):
+def load_maderas_xls(file=path_dbs+'/excel/MADERAS.xls'):
     """ Carga las propiedades codificadas ya establecidas de las maderas """
     maderas = []
     book = xlrd.open_workbook(file)
