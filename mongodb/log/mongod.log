@@ -1,0 +1,50 @@
+Sun Oct 14 08:20:45 
+Sun Oct 14 08:20:45 warning: 32-bit servers don't have journaling enabled by default. Please use --journal if you want durability.
+Sun Oct 14 08:20:45 
+Sun Oct 14 08:20:46 [initandlisten] MongoDB starting : pid=16601 port=27019 dbpath=/home/miltonlab/forestal/mongodb/data 32-bit host=debianlab
+Sun Oct 14 08:20:46 [initandlisten] 
+Sun Oct 14 08:20:46 [initandlisten] ** NOTE: when using MongoDB 32 bit, you are limited to about 2 gigabytes of data
+Sun Oct 14 08:20:46 [initandlisten] **       see http://blog.mongodb.org/post/137788967/32-bit-limitations
+Sun Oct 14 08:20:46 [initandlisten] **       with --journal, the limit is lower
+Sun Oct 14 08:20:46 [initandlisten] 
+Sun Oct 14 08:20:46 [initandlisten] db version v2.0.0, pdfile version 4.5
+Sun Oct 14 08:20:46 [initandlisten] git version: nogitversion
+Sun Oct 14 08:20:46 [initandlisten] build info: Linux biber 2.6.32-5-amd64 #1 SMP Mon Oct 3 03:59:20 UTC 2011 i686 BOOST_LIB_VERSION=1_42
+Sun Oct 14 08:20:46 [initandlisten] options: { bind_ip: "localhost", dbpath: "/home/miltonlab/forestal/mongodb/data", logpath: "/home/miltonlab/forestal/mongodb/log/mongod.log", port: 27019 }
+Sun Oct 14 08:20:46 [initandlisten] exception in initAndListen: 10310 Unable to acquire lock for lockfilepath: /home/miltonlab/forestal/mongodb/data/mongod.lock, terminating
+Sun Oct 14 08:20:46 dbexit: 
+Sun Oct 14 08:20:46 [initanSun Oct 14 08:25:14 [clientcursormon] mem (MB) res:12 virt:77 mapped:0
+Sun Oct 14 08:25:33 [initandlisten] connection accepted from 127.0.0.1:41327 #1
+Sun Oct 14 08:25:39 [conn1] end connection 127.0.0.1:41327
+Mon Oct 15 05:56:46 [clientcursormon] mem (MB) res:12 virt:78 mapped:0
+ct 14 08:20:46 [initandlisten] shutdown: closing all files...
+Sun Oct 14 08:20:46 [initandlisten] closeAllFiles() finished
+Sun Oct 14 08:20:46 dbexit: really exiting now
+=============================
+
+
+***** SERVER RESTARTED *****
+
+
+Sun Oct 14 08:22:07 
+Sun Oct 14 08:22:07 warning: 32-bit servers don't have journaling enabled by default. Please use --journal if you want durability.
+Sun Oct 14 08:22:07 
+Sun Oct 14 08:22:07 [initandlisten] MongoDB starting : pid=16611 port=27019 dbpath=/home/miltonlab/forestal/mongodb/data 32-bit host=debianlab
+Sun Oct 14 08:22:07 [initandlisten] 
+Sun Oct 14 08:22:07 [initandlisten] ** NOTE: when using MongoDB 32 bit, you are limited to about 2 gigabytes of data
+Sun Oct 14 08:22:07 [initandlisten] **       see http://blog.mongodb.org/post/137788967/32-bit-limitations
+Sun Oct 14 08:22:07 [initandlisten] **       with --journal, the limit is lower
+Sun Oct 14 08:22:07 [initandlisten] 
+Sun Oct 14 08:22:07 [initandlisten] db version v2.0.0, pdfile version 4.5
+Sun Oct 14 08:22:07 [initandlisten] git version: nogitversion
+Sun Oct 14 08:22:07 [initandlisten] build info: Linux biber 2.6.32-5-amd64 #1 SMP Mon Oct 3 03:59:20 UTC 2011 i686 BOOST_LIB_VERSION=1_42
+Sun Oct 14 08:22:07 [initandlisten] options: { bind_ip: "localhost", dbpath: "/home/miltonlab/forestal/mongodb/data", logappend: true, logpath: "/home/miltonlab/forestal/mongodb/log/mongod.log", port: 27019 }
+Sun Oct 14 08:22:07 [initandlisten] exception in initAndListen: 10310 Unable to acquire lock for lockfilepath: /home/miltonlab/forestal/mongodb/data/mongod.lock, terminating
+Sun Oct 14 08:22:07 dbexit: 
+Sun Oct 14 08:22:07 [initandlisten] shutdown: going to close listening sockets...
+Sun Oct 14 08:22:07 [initandlisten] shutdown: going to flush diaglog...
+Sun Oct 14 08:22:07 [initandlisten] shutdown: going to close sockets...
+Sun Oct 14 08:22:07 [initandlisten] shutdown: waiting for fs preallocator...
+Sun Oct 14 08:22:07 [initandlisten] shutdown: closing all files...
+Sun Oct 14 08:22:07 [initandlisten] closeAllFiles() finished
+Sun Oct 14 08:22:07 dbexit: really exiting now

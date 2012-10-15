@@ -27,7 +27,7 @@ jQuery('#btnguardar').click(function(){
   <body>
     <form id="form-propiedad" action="">
       $# discriminar edición o grabación
-      $if len(propiedad) > 1:
+      $if len(propiedad) == 0:
           $ readonly = "readonly='readonly'"
           $ disabled = "disabled='disabled'"
       $else:
@@ -60,6 +60,6 @@ jQuery('#btnguardar').click(function(){
       <!--input type="reset" value="LIMPIAR"/>
       <input type="submit" value="GRABAR"/-->
     </form>
-    <button id="btnguardar" class="boton-grande" $disabled>GUARDAR PROPIEDAD </button>
+    <button id="btnguardar" class="boton-grande" $disabled> GUARDAR PROPIEDAD </button>
   </body>
 </html>

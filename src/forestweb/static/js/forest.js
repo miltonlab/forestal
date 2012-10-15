@@ -55,7 +55,7 @@ function validar_entero(field){
 //Validacion de cajas de texto decimales con JS
 function validar_decimal(field){
     if ( field.value == "" ){
-	return;
+	return true;
     }
     var value = parseFloat(field.value);
     if ( isNaN(value) ){

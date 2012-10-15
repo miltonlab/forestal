@@ -57,7 +57,7 @@ $def with (lista_propiedades)
           $p.get('clase')
 	</td>
 	<td align="center">
-          <input type="checkbox" ${'checked' if p.get('obligatoria') else ''} name="obligatoria" readonly="true"/>
+          <input type="checkbox" ${'checked' if p.get('obligatoria') else ''} name="obligatoria" disabled="disabled" readonly="readonly"/>
 	</td>
 	<td align="center">
 	  $p.get('unidad','')

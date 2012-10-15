@@ -47,10 +47,15 @@ def contar_usos():
     return bd.usos.count()
 
 def buscar_propiedades(nombre='.*',codigo='.*'):
-    reconectar()
+    ###reconectar()
     if nombre=='.*': nombre = re.compile(nombre)
     if codigo=='.*': codigo = re.compile(codigo)
-    cursor = bd.propiedades.find( {'nombre':nombre,'codigo':codigo} ).sort('nombre',1) 
+    if nombre == '.*' and codigo == '.*':
+        cursor = bd.propiedades.find()
+    else:
+        cursor = bd.propiedades.find( {'nombre':nombre,'codigo':codigo} ).sort('nombre',1)
+    ###
+    print cursor.count()
     return [p for p in cursor]
 
 def buscar_usos(nombre='.*'):

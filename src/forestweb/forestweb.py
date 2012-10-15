@@ -85,7 +85,7 @@ class cambiarclave:
     def POST(self):
         form = web.input()
         if form.password == session.password:
-            if form.newpassword1 == form.newpassword2:
+            if form.newpassword1  == form.newpassword2:
                 if dbaccess.cambiar_clave(session.username,form.newpassword2):
                     print "<h3> Clave cambiada con éxito </h3>"
                 else:
@@ -94,7 +94,9 @@ class cambiarclave:
 class propiedades:
     def GET(self):
         propiedades = dbaccess.buscar_propiedades()
-        return renderizador.propiedades(propiedades)
+        # TODO: check why not work
+        # return renderizador.propiedades(propiedades)
+        return renderizador.propiedades(dbaccess.bd.propiedades.find())
 
 
 class editptecnologica:
@@ -117,7 +119,7 @@ class editptecnologica:
         propiedad['nombre'] = form.nombre
         propiedad['abreviatura'] = form.abreviatura
         propiedad['categoria'] = form.categoria
-        # de cajón
+        # obligatorio
         propiedad['clase'] = 'tecnológica'
         if form.get('obligatoria',''):
             propiedad['obligatoria'] = True
@@ -135,11 +137,11 @@ class editptecnologica:
                     # asegurando efectivamente el orden de los valores
                     a,b = val_min, val_max
                     val_min, val_max = min(a,b), max(a,b)
-                elif val_min and not val_max: 
-                    #val_max = None
+                elif val_min and (not val_max or val_max == ''): 
+                    val_max = None
                     val_min = float(val_min)                    
-                elif not val_min and val_max:
-                    #val_min = None
+                elif (not val_min or val_min == '') and val_max:
+                    val_min = None
                     val_max = float(val_max)
                 codificaciones[c['nombre']] = model.Rango(val_min,val_max)
             propiedad['codificaciones'] = codificaciones

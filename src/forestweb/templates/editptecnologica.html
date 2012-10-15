@@ -14,28 +14,28 @@ $def with(propiedad,codificaciones)
 	      var resp = confirm('Está seguro que desea grabar los datos');
 	      if (! resp){
                   window.location.href='#';
-              };
-	      jQuery.ajax({
-		  type: 'POST',
-		  url: '/editptecnologica',
-		  data: jQuery('#form-propiedad').serializeArray(),
-		  error: function(xhr,status){
-			alert("Error al grabar propiedad tecnológica: " + status + xhr);
-		  },
-		 success: function(response){
-		     // En la pagina principal
-		     jQuery('#content').html('<h3>  Propiedad Grabada con Exito </h3>');
-		 }
-
-	      });
+              } else {
+		  jQuery.ajax({
+		      type: 'POST',
+		      url: '/editptecnologica',
+		      data: jQuery('#form-propiedad').serializeArray(),
+		      error: function(xhr,status){
+			  alert("Error al grabar propiedad tecnológica: " + status + xhr);
+		      },
+		      success: function(response){
+			  // En la pagina principal
+			  jQuery('#content').html('<h3>  Propiedad Grabada con Exito </h3>');
+		      }
+		  });
+	      }
 	  });
       });
     </script>
   </head>
   <body>
     <form id="form-propiedad" action="">
-      $# discriminar edición o grabación
-      $if len(propiedad) > 1:
+      $# discriminar edición o creacion
+      $if len(propiedad) == 0:
           $ readonly = "readonly='readonly'"
           $ disabled = "disabled='disabled'"
       $else:
@@ -61,21 +61,21 @@ $def with(propiedad,codificaciones)
       <fieldset id="codificaciones">
 	<legend> Codificaciones </legend>
 	$for c in codificaciones:
-	<label> $c.get('nombre') - [<b>$c.get('valor')</b>]: </label>
+	<label> $c.get('nombre') [<b>$c.get('valor')</b>]: </label>
 	$ min = ''
 	$ max = ''
 	$if propiedad.get('codificaciones'):
 	    $ min = propiedad.get('codificaciones').get(c.get('nombre')).min
-	    $ min = min if min else '<'
+	    $ min = min if min else ''
 	    $ max = propiedad.get('codificaciones').get(c.get('nombre')).max
-	    $ max = max if max else '>'
-	De <input id="$c.get('valor')-min" name="$c.get('valor')-min" type="text" value="$min" class="rango-decimal" $readonly title="vacio significa '<'"/>
-	a  <input id="$c.get('valor')-max" name="$c.get('valor')-max" type="text" value="$max" class="rango-decimal" $readonly title="vacio significa '>'"/> 
+	    $ max = max if max else ''
+	De <input id="$c.get('valor')-min" name="$c.get('valor')-min" type="text" value="$min" class="rango-decimal" $readonly/>
+	a  <input id="$c.get('valor')-max" name="$c.get('valor')-max" type="text" value="$max" class="rango-decimal" $readonly/> 
 	<a id="$c.get('valor')-msg" width="60px"> <!-- para mensajes --> </a><br/>
       </fieldset>
       <!--input type="reset" value="LIMPIAR"/>
       <input type="submit" value="GRABAR"/-->
     </form>
-    <button id="btnguardar" class="boton-grande" $disabled>GUARDAR PROPIEDAD  </button>
+    <button id="btnguardar" class="boton-grande" $disabled> GUARDAR PROPIEDAD  </button>
   </body>
 </html>
