@@ -1,0 +1,15 @@
+#Compilados, respaldados y base de datos
+*.pyc
+*~
+*.sql
+#*#
+.#*
+.old
+.bak
+#MongoDB
+*.lock
+mongodb/linux32/data/journal
+mongodb/linux64/data/journal
+mongodb/win32/data/journal
+mongodb/win64/data/journal
+*.log

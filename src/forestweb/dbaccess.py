@@ -1,18 +1,31 @@
 #-*- coding: utf-8 -*-
+
 import model
 import re
+import mongodb
 from pymongo.connection import Connection
 from pymongo.son_manipulator import SONManipulator
+from pymongo.errors import AutoReconnect
 
-conexion = Connection('localhost')
-bd = conexion.bosqueseco
-###Cambiar configuracion
-bd.authenticate('forestweb','forestweb') 
+conexion = None
+bd = None
+try:
+    conexion = Connection('localhost:27019')
+    print "Conexión satisfactoria al Servidor de BD"
+    bd = conexion.bosqueseco
+    print "Conexión satisfactoria a la BD"
+    ###Cambiar configuracion
+    bd.authenticate('forestweb','forestweb')
+    print "Autenticación Satisfactoria en la BD"
+except AutoReconnect as ex:
+    print u"Error de conexión a la BD: {0}".format(ex)
+    """ El servidor de base de datos está apagado """
+    mongodb.start()
 
 #testing ...
 def reconectar():
     conexion = Connection('localhost')
-    #bd = conexion.forestal
+    #BD = conexion.forestal
     bd = conexion.bosqueseco
     bd.authenticate('forestweb','forestweb')
     
@@ -166,7 +179,8 @@ class TransformerRango(SONManipulator):
         return son
 
 # mapeador entre objetos model.Rango y diccionarios
-bd.add_son_manipulator(TransformerRango())    
+if bd is not None:
+    bd.add_son_manipulator(TransformerRango())    
 
 
 
