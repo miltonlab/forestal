@@ -42,6 +42,10 @@ def winservice():
     print "Instalado el Servicio MongoDB satisfactoriamente"
 
 def setup():
+    # Instala la base de datos
+    os.system("{0}/mongorestore --dbpath {1}/data {2}/../install/data/mongobackup".format(
+        SERVERDIR, SERVERDIR, MONGODIR
+        ))
     # Agregar el usuario administrador del servidor MongoDB
     os.system('{0}/mongo {1}:{2}/admin --quiet --eval "db.addUser(\'mongoadmin\',\'humongous\')"'.format(SERVERDIR, HOST, PORT))
 
