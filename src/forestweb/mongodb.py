@@ -10,10 +10,10 @@ import platform
 """ Parametros del servidor """
 DIRECTORIO = os.path.abspath(os.path.dirname(__file__))
 MONGODIR=os.path.abspath('{0}/../../mongodb'.format(DIRECTORIO))
-HOST='localhost'
+HOST='0.0.0.0'
 PORT=27019
 
-""" Obtención de la architectura correacta """
+""" Obtención de la architectura correcta """
 sistema = platform.system().lower()
 arquitectura = platform.architecture()[0]
 if 'linux' in sistema and '64' in arquitectura:

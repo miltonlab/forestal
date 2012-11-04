@@ -60,11 +60,13 @@ $def with(propiedad,codificaciones)
 
       <fieldset id="codificaciones">
 	<legend> Codificaciones </legend>
+	$# Recorremos las Base de datos de codificaciones propiamente
 	$for c in codificaciones:
 	<label> $c.get('nombre') [<b>$c.get('valor')</b>]: </label>
 	$ min = ''
 	$ max = ''
-	$if propiedad.get('codificaciones'):
+	$# Se necesita verificar adicionalmente si la codificacion esta en la propiedad
+	$if propiedad.get('codificaciones') and propiedad['codificaciones'].get(c.get('nombre')):
 	    $ min = propiedad.get('codificaciones').get(c.get('nombre')).min
 	    $ min = min if min else ''
 	    $ max = propiedad.get('codificaciones').get(c.get('nombre')).max
