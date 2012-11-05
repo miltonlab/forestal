@@ -20,11 +20,15 @@ REM #==========================================================
 
 cd C:\forestweb\mongodb\win32\
 
-mongorestore --dbpath data C:\forestweb\data\mongobackup
+REM mongorestore --dbpath data C:\forestweb\data\mongobackup
+mongorestore --dbpath data ..\..\data\mongobackup
 
 echo ::: Generada la Base de datos. OK
 
-# Pendiente iniciar servidor de BD
+mongod --dbpath=data  --logpath=log\mongod.log --bind_ip=localhost --port=27019 --logappend
+
+echo ::: Iniciado el Servidor MongoDB :::
+
 mongo localhost:27019/admin --quiet --eval "db.addUser('mongoadmin','humongous')"
 
 echo ::: Agregado el usuario administrador de BD. OK

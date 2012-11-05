@@ -27,8 +27,8 @@ elif 'windows' in sistema and '32' in arquitectura:
     
 def start():
     lock = '{0}/data/mongod.lock'.format(SERVERDIR)
-    #if os.path.isfile(lock):
-    #    os.remove(lock)
+    if os.path.isfile(lock):
+        os.remove(lock)
     os.system("{0}/mongod --auth --dbpath={1}/data  --logpath={2}/log/mongod.log --bind_ip={3} --port={4} --logappend &".format(SERVERDIR, SERVERDIR, SERVERDIR, HOST, PORT))
     
 def stop():
@@ -37,17 +37,28 @@ def stop():
 
 def winservice():
     """ Instalar MongoDB como un servicio windows"""
-    os.system("{0}/mongod --install --auth --dbpath={1}/data  --logpath={2}/log/mongod.log --bind_ip={3} --port={4} ".format(SERVERDIR, SERVERDIR, SERVERDIR, HOST, PORT))
+    os.system("{0}/mongod --install --auth --dbpath={1}/data  --logpath={2}/log/mongod.log --bind_ip=127.0.0.1 --port={4} ".format(SERVERDIR, SERVERDIR, SERVERDIR, HOST, PORT))
     os.system("net start MongoDB")
     print "Instalado el Servicio MongoDB satisfactoriamente"
 
 def setup():
-    # Instala la base de datos
-    os.system("{0}/mongorestore --dbpath {1}/data {2}/../install/data/mongobackup".format(
-        SERVERDIR, SERVERDIR, MONGODIR
-        ))
-    # Agregar el usuario administrador del servidor MongoDB
-    os.system('{0}/mongo {1}:{2}/admin --quiet --eval "db.addUser(\'mongoadmin\',\'humongous\')"'.format(SERVERDIR, HOST, PORT))
+    try:
+        # Instala la base de datos
+        os.system("{0}/mongorestore --dbpath {1}/data {2}/../install/data/mongobackup".format(
+                SERVERDIR, SERVERDIR, MONGODIR
+                ))
+        
+        # Eliminar posibles problemas de bloqueo
+        lock = '{0}/data/mongod.lock'.format(SERVERDIR)
+        if os.path.isfile(lock):
+            os.remove(lock)
+        # Arranca el servidor de BD
+        stop(); # Si el servidor está corriendo
+        os.system("{0}/mongod --auth --dbpath={1}/data  --logpath={2}/log/mongod.log --bind_ip=127.0.0.1 --port={4} --logappend &".format(SERVERDIR, SERVERDIR, SERVERDIR, HOST, PORT))
+        # Agregar el usuario administrador del servidor MongoDB
+        os.system('{0}/mongo {1}:{2}/admin --quiet --eval "db.addUser(\'mongoadmin\',\'humongous\')"'.format(SERVERDIR, '127.0.0.1', PORT))
+    except Exception, ex:
+        print "Errores al instalar la Base de Datos forestweb: ", ex
 
 # Verificacion Inicial
 ###start()
