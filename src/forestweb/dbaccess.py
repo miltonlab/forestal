@@ -1,8 +1,7 @@
 #-*- coding: utf-8 -*-
 
-import model
+import time
 import re
-import mongodb
 from pymongo.connection import Connection
 from pymongo.son_manipulator import SONManipulator
 from pymongo.errors import AutoReconnect
@@ -11,16 +10,21 @@ conexion = None
 bd = None
 try:
     conexion = Connection('localhost:27019')
-    print "Conexión satisfactoria al Servidor de BD"
     bd = conexion.bosqueseco
-    print "Conexión satisfactoria a la BD"
-    ###Cambiar configuracion
+    # TODO: Cambiar configuracion a través de archivos
     bd.authenticate('forestweb','forestweb')
-    print "Autenticación Satisfactoria en la BD"
+    print "Conexión satisfactoria a la BD"
 except AutoReconnect as ex:
     print u"Error de conexión a la BD: {0}".format(ex)
-    """ El servidor de base de datos está apagado """
-    mongodb.start()
+    # Intento de reconexion después de 1 segundo
+    time.sleep(1)
+    conexion = Connection('localhost:27019')
+    bd = conexion.bosqueseco
+    # TODO: Cambiar configuracion a través de archivos
+    bd.authenticate('forestweb','forestweb')
+    print "Conexión satisfactoria a la BD"
+
+import model
 
 #testing ...
 def reconectar():
@@ -60,7 +64,6 @@ def contar_usos():
     return bd.usos.count()
 
 def buscar_propiedades(nombre='.*',codigo='.*'):
-    ###reconectar()
     if nombre=='.*': nombre = re.compile(nombre)
     if codigo=='.*': codigo = re.compile(codigo)
     if nombre == '.*' and codigo == '.*':
@@ -75,7 +78,8 @@ def buscar_usos(nombre='.*'):
     """ Debe retornar una lista de objetos model.Uso """
     nombre = re.compile(nombre)
     usos = []
-    for u in bd.usos.find({'nombre':nombre}).sort('nombre',1):
+    ### for u in bd.usos.find({'nombre':nombre}).sort('nombre',1):
+    for u in bd.usos.find().sort('0nombre',1):
         uso = model.Uso()
         uso.__dict__ = u
         usos.append(uso)
@@ -94,7 +98,8 @@ def buscar_maderas(nombre='.*'):
     """ Debe retornar una lista de objetos model.Madera """
     nombre = re.compile(nombre)
     maderas = []
-    for m in bd.maderas.find({'nombre':nombre}).sort('nombre',1):
+    ### for m in bd.maderas.find({'nombre':nombre}).sort('nombre',1):
+    for m in bd.maderas.find().sort('nombre',1):
         madera = model.Madera()
         madera.__dict__ = m
         maderas.append(madera)

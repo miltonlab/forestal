@@ -1,10 +1,15 @@
 #-*- coding: utf-8 -*-
 
 import web
-import model
 import mongodb
-import dbaccess
+# Iniciamos el Sevidor de Base de Datos
+# TODO: Se podria crear como un servicio del sistema 
+mongodb.start()
+
 import logic
+import model
+# Conexión implicita a la BD luego de iniciar servidor
+import dbaccess
 
 urls = ('/','portada',
         '/login','login',
@@ -189,6 +194,7 @@ class maderas:
         maderas = dbaccess.buscar_maderas()
         propiedades = dbaccess.buscar_propiedades() 
         return renderizador.maderas(propiedades,maderas)
+        ### return renderizador.maderas(propiedades, dbaccess.bd.maderas.find())
 
 class editmadera:
     def GET(self):
@@ -261,6 +267,7 @@ class usos:
         usos = dbaccess.buscar_usos()
         propiedades = dbaccess.buscar_propiedades()
         return renderizador.usos(propiedades,usos)
+        ### return renderizador.usos(propiedades, dbaccess.bd.usos.find())
 
 class codificar:
     """ Codifica los valores de las propiedades de una madera """

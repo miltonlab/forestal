@@ -10,13 +10,15 @@ REM #=======================================================
 
 mkdir C:\forestweb
 
-xcopy /E ..\..\src\forestweb\ C:\forestweb
+xcopy /E ..\..\src C:\forestweb
+
+xcopy /E ..\..\mongodb C:\forestweb
 
 echo ::: COPIADA LA APLICACION 'forestweb' en C:
 
 REM #=========================================================
 REM # Instalacion de la Base de Datos
-REM #==========================================================
+pyt REM #==========================================================
 
 cd C:\forestweb\mongodb\win32\
 
