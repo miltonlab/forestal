@@ -53,6 +53,8 @@ class portada:
             session.login = 0
             session._save()
             session.kill()
+            # Detener el servidor de BD
+            mongodb.stop()
         return renderizador.portada()
 
 
@@ -199,7 +201,9 @@ class maderas:
 class editmadera:
     def GET(self):
         """ Lectura de una madera """
-        propiedades = dbaccess.buscar_propiedades()
+        ### propiedades = dbaccess.buscar_propiedades()
+        # TODO: Custiones de acceso a la BD
+        propiedades = dbaccess.bd.propiedades.find()
         madera = None
         if 'id_madera' in web.input():
             id_madera = web.input().id_madera
@@ -215,7 +219,7 @@ class editmadera:
         data = web.input()
         m.id_madera = data.id_madera
         m.nombre = data.nombre
-        # se debe recorrer todas las propiedades existentes
+        # Se debe recorrer todas las propiedades existentes
         for p in dbaccess.buscar_propiedades():
             id_p = p.get('id_propiedad')
             valor =  data['prop-'+id_p]
@@ -226,7 +230,9 @@ class editmadera:
 
 class edituso:
     def GET(self):
-        propiedades = dbaccess.buscar_propiedades()
+        # TODO: Cuestiones de acceso a BD
+        ### propiedades = dbaccess.buscar_propiedades()
+        propiedades = dbaccess.bd.propiedades.find()
         uso = None
         if 'id_uso' in web.input():
             id_uso = web.input().id_uso
@@ -236,10 +242,11 @@ class edituso:
             uso.id_uso = dbaccess.contar_usos()  + 1
         return renderizador.edituso(uso,propiedades)
     
-    # grabar uso
     def POST(self):
+        """ Graba un objeto Uso con el respectivo mapeo """
         u = model.Uso()
         data = web.input()
+        u.id_uso = data.id_uso
         u.nombre = data.nombre
         # se debe recorrer todas las propiedades existentes
         for p in dbaccess.buscar_propiedades():

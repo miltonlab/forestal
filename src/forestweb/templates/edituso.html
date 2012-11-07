@@ -18,7 +18,7 @@ $def with(uso,propiedades)
 		url: '/edituso',
 		data: jQuery('#form-uso').serializeArray(),
 		error: function(xhr,status){
-		    alert("Error al grabar propiedad tecnológica: " + status + xhr);
+		    alert("Error al grabar uso: " + status + xhr);
 		},
 		success: function(response){
 		    // En la pagina principal
@@ -42,6 +42,7 @@ $def with(uso,propiedades)
         $ disabled = ""
 
     <form id="form-uso" action="" method="">
+      <input id="id_uso" type="hidden" name="id_uso" value="$uso.id_uso"/>
       <a id="div-nombre-uso"  style="font-size: 18px; vertical-align: top;" > Nombre del Uso:  </a> <br/>
       <input id="nombre" name="nombre" type="text" value="$uso.nombre" class="texto-titulo"/> 
       <fieldset>

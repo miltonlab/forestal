@@ -141,6 +141,10 @@ function config_edit_madera(){
 	    switch(this.value){
 	    case 'codificar':
 		// Se envía a codificar las propiedades en el servidor
+		var resp = confirm('Toda la columna CODIFICACIONES se reemplazará en base a la columna VALORES');
+		if (! resp){
+		    return;
+		}
 		jQuery.ajax({
 		    type: "GET",
 		    url: "/codificar",
@@ -153,6 +157,8 @@ function config_edit_madera(){
 			    var nombre_prop='prop-'+p;
 			    jQuery("#" + nombre_prop).val(response[p]);
 			};
+			/// jQuery('#btnguardar').attr('disabled','false');
+			jQuery('#btnguardar').each(function(){this.removeAttribute("disabled");});
 		    },
 		    error: function(xhr,status){
 			alert('Ocurrió un error al enviar madera: ' + status);
@@ -161,6 +167,10 @@ function config_edit_madera(){
 		//No hay break para propagar el siguiente case con una excepcion
 		
 	    case 'por_valor':
+		var resp = confirm('La columna CODIFICACIONES se descartará');
+		if (! resp){
+		    return;
+		}
 		// No se puede guardar aún
 		// jQuery('#btnguardar').attr('disabled','true');
 		jQuery("input[name^='valor']").each(function(){
