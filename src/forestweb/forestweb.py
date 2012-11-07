@@ -53,8 +53,6 @@ class portada:
             session.login = 0
             session._save()
             session.kill()
-            # Detener el servidor de BD
-            mongodb.stop()
         return renderizador.portada()
 
 
@@ -274,7 +272,6 @@ class usos:
         usos = dbaccess.buscar_usos()
         propiedades = dbaccess.buscar_propiedades()
         return renderizador.usos(propiedades,usos)
-        ### return renderizador.usos(propiedades, dbaccess.bd.usos.find())
 
 class codificar:
     """ Codifica los valores de las propiedades de una madera """

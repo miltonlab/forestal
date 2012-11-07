@@ -18,7 +18,7 @@ echo ::: COPIADA LA APLICACION 'forestweb' en C:
 
 REM #=========================================================
 REM # Instalacion de la Base de Datos
-pyt REM #==========================================================
+REM #==========================================================
 
 cd C:\forestweb\mongodb\win32\
 

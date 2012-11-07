@@ -71,7 +71,6 @@ def buscar_propiedades(nombre='.*',codigo='.*'):
     else:
         cursor = bd.propiedades.find( {'nombre':nombre,'codigo':codigo} ).sort('nombre',1)
     ###
-    print cursor.count()
     return [p for p in cursor]
 
 def buscar_usos(nombre='.*'):
@@ -79,10 +78,11 @@ def buscar_usos(nombre='.*'):
     nombre = re.compile(nombre)
     usos = []
     ### for u in bd.usos.find({'nombre':nombre}).sort('nombre',1):
-    for u in bd.usos.find().sort('0nombre',1):
+    for u in bd.usos.find().sort('nombre',1):
         uso = model.Uso()
         uso.__dict__ = u
         usos.append(uso)
+    usos.sort(lambda u1,u2: cmp(u1.nombre, u2.nombre))
     return usos
 
 def buscar_uso(id_uso):
