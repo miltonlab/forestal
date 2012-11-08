@@ -28,7 +28,7 @@ echo ::: COPIADA LA APLICACION 'forestal' en C:
 pause
 
 REM #=========================================================
-REM # Instalacion de la Base de Datos
+REM # Instalacion de las Bases de Datos
 REM #==========================================================
 
 cd C:\forestal\mongodb\win32\
@@ -36,15 +36,7 @@ cd C:\forestal\mongodb\win32\
 REM mongorestore --dbpath data C:\forestal\datainstall\mongodump
 mongorestore --dbpath data ..\..\datainstall\mongodump
 
-echo ::: Generada la Base de datos. OK
-
-mongod --dbpath=data  --logpath=log\mongod.log --bind_ip=localhost --port=27019 --logappend &
-
-echo ::: Iniciado el Servidor MongoDB :::
-
-mongo localhost:27019/admin --quiet --eval "db.addUser('mongoadmin','humongous')"
-
-echo ::: Agregado el usuario administrador de BD. OK
+echo ::: Generada las Bases de datos. OK
 pause
 
 REM #=========================================================
