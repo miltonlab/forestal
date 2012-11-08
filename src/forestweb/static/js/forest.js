@@ -167,10 +167,6 @@ function config_edit_madera(){
 		//No hay break para propagar el siguiente case con una excepcion
 		
 	    case 'por_valor':
-		var resp = confirm('La columna CODIFICACIONES se descartará');
-		if (! resp){
-		    return;
-		}
 		// No se puede guardar aún
 		// jQuery('#btnguardar').attr('disabled','true');
 		jQuery("input[name^='valor']").each(function(){

@@ -1,0 +1,3 @@
+
+ * Realizar el apagado del servidor mongodb con pymongo
+ * Mejorar el rendimiento del TableSorter en la lista de 'Usos'
