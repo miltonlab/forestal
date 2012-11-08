@@ -8,32 +8,44 @@ REM #=======================================================
 REM # Instalacion del codigo de la Aplicacion
 REM #=======================================================
 
-mkdir C:\forestweb
+mkdir C:\forestal
 
-xcopy /E ..\..\src C:\forestweb
+mkdir C:\forestal\src
 
-xcopy /E ..\..\mongodb C:\forestweb
+xcopy /E ..\..\src C:\forestal\src
 
-echo ::: COPIADA LA APLICACION 'forestweb' en C:
+mkdir C:\forestal\datainstall
+
+xcopy /E ..\data C:\forestal\datainstall
+
+mkdir C:\forestal\mongodb
+
+mkdir C:\forestal\mongodb\win32
+
+xcopy /E ..\..\mongodb\win32 C:\forestal\mongodb\win32
+
+echo ::: COPIADA LA APLICACION 'forestal' en C:
+pause
 
 REM #=========================================================
 REM # Instalacion de la Base de Datos
 REM #==========================================================
 
-cd C:\forestweb\mongodb\win32\
+cd C:\forestal\mongodb\win32\
 
-REM mongorestore --dbpath data C:\forestweb\data\mongobackup
-mongorestore --dbpath data ..\..\data\mongobackup
+REM mongorestore --dbpath data C:\forestal\datainstall\mongodump
+mongorestore --dbpath data ..\..\datainstall\mongodump
 
 echo ::: Generada la Base de datos. OK
 
-mongod --dbpath=data  --logpath=log\mongod.log --bind_ip=localhost --port=27019 --logappend
+mongod --dbpath=data  --logpath=log\mongod.log --bind_ip=localhost --port=27019 --logappend &
 
 echo ::: Iniciado el Servidor MongoDB :::
 
 mongo localhost:27019/admin --quiet --eval "db.addUser('mongoadmin','humongous')"
 
 echo ::: Agregado el usuario administrador de BD. OK
+pause
 
 REM #=========================================================
 REM # Instalacion de la Aplicacion Web como proceso
@@ -47,6 +59,7 @@ echo ::: Ejecute el programa 'forestweb' del Menu 'Todos los programas' :::
 
 echo ::: y luego habra el navegador para y dirijase a la direccion: 	:::
 
-echo ::: http://localhost:8080 y empezar a usar la aplicacion.			:::
+echo ::: http://localhost:8080 y empezar a usar la aplicacion.:::
+pause
 
 pause
