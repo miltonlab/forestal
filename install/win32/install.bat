@@ -1,8 +1,13 @@
 @echo off
 
 echo Si no esta seguro de iniciar la instalacion de 'forestweb' presione Ctrl+c
-
 pause
+
+REM #=========================================================
+REM # Instalacion de python
+REM #==========================================================
+
+python-2.7.3.msi
 
 REM #=======================================================
 REM # Instalacion del codigo de la Aplicacion
@@ -52,5 +57,6 @@ cd C:\forestal\mongodb\win32\
 REM mongorestore --dbpath data C:\forestal\datainstall\mongodump
 mongorestore --dbpath data ..\..\datainstall\mongodump
 
-echo ::: Generada las Bases de datos. OK
+echo ::: GENERADAS LAS BASES DE DATOS. OK
+echo ::: Para completar la instalacion reinicie su Sistema Operativo
 pause
