@@ -36,7 +36,9 @@ REM #=========================================================
 REM # Instalacion de la Aplicacion Web como proceso
 REM #==========================================================
 
+copy "forestal.bat" C:\forestal\
 copy "forestal.bat" "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+
 
 REM C:\Users\windows7\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 echo ::: COPIADO EL SCRIPT DE EJECUCION DE LA APLICACION WEB AL MENU INICIO. OK.
@@ -54,8 +56,11 @@ REM #==========================================================
 
 cd C:\forestal\mongodb\win32\
 
-REM mongorestore --dbpath data C:\forestal\datainstall\mongodump
 mongorestore --dbpath data ..\..\datainstall\mongodump
+
+REM #mongod --install --auth --dbpath=data  --logpath=log/mongod.log --bind_ip=127.0.0.1 --port=27019 --serviceName=MongoDB
+
+REM #net start MongoDB
 
 echo ::: GENERADAS LAS BASES DE DATOS. OK
 echo ::: Para completar la instalacion reinicie su Sistema Operativo

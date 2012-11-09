@@ -27,9 +27,11 @@ elif 'windows' in sistema and '32' in arquitectura:
     
 def start():
     try:
-        os.system("{0}/mongod --auth --dbpath={1}/data  --logpath={2}/log/mongod.log --bind_ip={3} --port={4} --logappend &".format(
-                SERVERDIR, SERVERDIR, SERVERDIR, HOST, PORT))
-        print u'Servidor de Base de Datos iniciado satisfactoriamente !!!'
+		if 'windows' in sistema and '64' in arquitectura:
+			os.system("start /min {0}/mongod --auth --dbpath={1}/data  --logpath={2}/log/mongod.log --bind_ip={3} --port={4} --logappend &".format(SERVERDIR, SERVERDIR, SERVERDIR, HOST, PORT))
+		else:
+			os.system("{0}/mongod --auth --dbpath={1}/data  --logpath={2}/log/mongod.log --bind_ip={3} --port={4} --logappend &".format(                SERVERDIR, SERVERDIR, SERVERDIR, HOST, PORT))
+		print u'Servidor de Base de Datos iniciado satisfactoriamente !!!'
     except Exception, ex:
         print "Error al iniciar servidor mongodb: ", ex
 
