@@ -1,3 +1,3 @@
 cd C:\forestal\src\forestweb
 
-C:\Python27\python forestweb.py
+start /b /min "" "C:\Python27\python" forestweb.py
