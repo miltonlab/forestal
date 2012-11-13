@@ -1,9 +1,13 @@
-
+﻿
 Sistema para Analisis de Usos Potenciales de la Madera
 ======================================================
 
-Instrucciones para instalar el sistema:
+Instrucciones para instalar la aplicacion bajo el Sistema Operativo Windows:
 
- * Ejecute el archivo "install.bat" que se encuentra en la carpeta: install\win32
- * Reinice su computadora
- * Ejecute el acceso directo 'forestweb' que se encuentra en su escritorio y la carpeta de todos los programas.
+ * Ejecute el archivo "install.bat" que se encuentra en la carpeta: "install\win32". 
+   Si ya tiene instalado Python2.7 en su computador puede cancelar ese paso.
+ * Reinice su computadora.
+ * Ejecute el acceso directo 'forestweb' que se encuentra en su escritorio o en la 
+   carpeta de Todos los Programas.
+
+ * Si en algun momento tiene problemas para iniciar la aplicacion elimine el archivo c:\forestal\mongodb\win32\mongod.lock y ejecute el programa 'forestalini' del menu "Todos los programas" > "Inicio".

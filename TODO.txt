@@ -1,4 +1,4 @@
-
+﻿
 Mejoras para proximos desarrollos:
 
  * Almacenar la configuracion de acceso a la base de datos en un archivo.
