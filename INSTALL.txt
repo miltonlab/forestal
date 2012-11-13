@@ -1,0 +1,9 @@
+
+Sistema para Analisis de Usos Potenciales de la Madera
+======================================================
+
+Instrucciones para instalar el sistema:
+
+ * Ejecute el archivo "install.bat" que se encuentra en la carpeta: install\win32
+ * Reinice su computadora
+ * Ejecute el acceso directo 'forestweb' que se encuentra en su escritorio y la carpeta de todos los programas.

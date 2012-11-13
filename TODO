@@ -1,3 +1,5 @@
 
- * Realizar el apagado del servidor mongodb con pymongo
- * Mejorar el rendimiento del TableSorter en la lista de 'Usos'
+Mejoras para proximos desarrollos:
+
+ * Almacenar la configuracion de acceso a la base de datos en un archivo.
+ * Mejorar el rendimiento del plugin TableSorter en la lista de 'Usos'
