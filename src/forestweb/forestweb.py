@@ -53,6 +53,7 @@ class portada:
             session.login = 0
             session._save()
             session.kill()
+			dbaccess.conexion.disconnect()
         return renderizador.portada()
 
 

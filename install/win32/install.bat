@@ -30,19 +30,21 @@ mkdir C:\forestal\mongodb\win32
 xcopy /E ..\..\mongodb\win32 C:\forestal\mongodb\win32
 
 copy forestweb.URL "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs
+
 copy forestweb.URL "%USERPROFILE%\Desktop"
 
-echo ::: COPIADA LA APLICACION 'forestal' en C:
+echo ::: COPIADA LA APLICACION 'forestal' en C: OK !
 pause
 
 REM #=========================================================
 REM # Instalacion de la Aplicacion Web como proceso
 REM #==========================================================
 
-copy "forestal.bat" "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+copy "forestalsrv.bat"  C:\forestal\
 
-REM C:\Users\windows7\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
-echo ::: COPIADO SCRIPT DE EJECUCION DE APLICACION WEB AL MENU INICIO. OK.
+copy "forestalini.lnk" "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+
+echo ::: INSTALADA LA APLICACION WEB COMO SERVIDOR. OK.!
 
 pause
 
@@ -54,9 +56,7 @@ cd C:\forestal\mongodb\win32\
 
 mongorestore --dbpath=data ..\..\datainstall\mongodump
 
-REM #mongod --install --auth --dbpath=data  --logpath=log/mongod.log --bind_ip=127.0.0.1 --port=27019 --serviceName=MongoDB
-
-REM #net start MongoDBs
-
-echo ::: GENERADAS LAS BASES DE DATOS. OK
+echo ::: GENERADAS LAS BASES DE DATOS. OK  :::
+echo ""
+echo :::  REINICE SU COMPUTADOR PARA COMPLETAR LA INSTALACION !!! :::
 pause
