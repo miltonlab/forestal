@@ -29,6 +29,10 @@ mkdir C:\forestal\mongodb\win32
 
 xcopy /E ..\..\mongodb\win32 C:\forestal\mongodb\win32
 
+mkdir C:\forestal\doc
+
+xcopy /E ..\..\doc C:\forestal\doc
+
 copy forestweb.URL "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs
 
 copy forestweb.URL "%USERPROFILE%\Desktop"
