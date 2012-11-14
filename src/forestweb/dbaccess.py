@@ -15,7 +15,7 @@ try:
     bd.authenticate('forestweb','forestweb')
     print "Conexión satisfactoria a la BD"
 except AutoReconnect as ex:
-    print u"Error de conexión a la BD: {0}".format(str(x))
+    print u"Error de conexión a la BD: {0}".format(str(ex))
     # Intento de reconexion después de 1 segundo
     time.sleep(1)
     conexion = Connection('localhost:27019')
