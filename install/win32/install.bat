@@ -60,6 +60,8 @@ cd C:\forestal\mongodb\win32\
 
 mongorestore --dbpath=data ..\..\datainstall\mongodump
 
+del data\mongod.lock
+
 echo ::: GENERADAS LAS BASES DE DATOS. OK  :::
 echo ""
 echo :::  REINICE SU COMPUTADOR PARA COMPLETAR LA INSTALACION !!! :::
