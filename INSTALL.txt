@@ -1,11 +1,12 @@
 ﻿
-Sistema para Analisis de Usos Potenciales de la Madera
-======================================================
+Intalación del "Sistema para Analisis de Usos Potenciales de la Madera"
+==========================================================================
 
 Instrucciones para instalar la aplicacion bajo el Sistema Operativo Windows:
+----------------------------------------------------------------------------
 
  * Ejecute el archivo "install.bat" que se encuentra en la carpeta: "install\win32". 
    NOTA: Si ya tiene instalado Python2.7 en su computador puede cancelar ese paso.
- * Presione la tecla 'enter' luego de cada paso durante la instalación
+ * Presione la tecla "enter" en cada paso durante la instalación.
  * Reinice su computadora.
  
